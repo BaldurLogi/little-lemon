@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import HomePage from "./components/HomePage";
 import Footer from "./Footer";
+import Header from "./Header";
 import Main from "./Main";
 import ConfirmedBooking from "./components/ConfirmedBooking";
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <Router>
       <>
+        <Header />
         <Nav />
         <Routes>
           <Route path="/" element={<HomePage />} />

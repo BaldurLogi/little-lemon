@@ -1,14 +1,29 @@
-import { initializeTimes, updateTimes } from "./Main";
+import { act } from "react";
+import { fetchData, initializeTimes, updateTimes } from "./Main";
 
-test("initializeTimes returns expected initial times", () => {
-  const expectedTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-  expect(initializeTimes()).toEqual(expectedTimes);
+// ✅ Mock `fetchAPI` to return predictable values
+beforeAll(() => {
+  window.fetchAPI = jest.fn().mockImplementation(() => ["17:00", "18:00"]);
 });
 
-test("updateTimes returns the same state it receives", () => {
-  const previousState = ["17:00", "18:00", "19:00"];
-  const action = { type: "UPDATE_TIMES", payload: "2024-03-10" }; // Example date
-  const expectedState = initializeTimes(); // Expecting the function's return
+describe("Booking API Tests", () => {
+  test("initializeTimes should return expected times", async () => {
+    let result;
+    await act(async () => {
+      result = await initializeTimes();
+    });
 
-  expect(updateTimes(previousState, action)).toEqual(expectedState);
+    expect(window.fetchAPI).toHaveBeenCalled();
+    expect(result).toEqual(["17:00", "18:00"]);
+  });
+
+  test("updateTimes should return new times based on date selection", async () => {
+    let result;
+    await act(async () => {
+      result = await updateTimes([], { type: "UPDATE_TIMES", payload: new Date("2025-03-10") });
+    });
+
+    expect(window.fetchAPI).toHaveBeenCalledWith(new Date("2025-03-10"));
+    expect(result).toEqual(["17:00", "18:00"]);
+  });
 });

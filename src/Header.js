@@ -4,7 +4,7 @@ import "./index.css";
 function Header() {
   return (
     <header>
-      <img src="/path-to-little-lemon-logo.png" alt="Little Lemon Logo" />
+      <img src="/Logo.png" alt="Little Lemon Logo" />
     </header>
   );
 }

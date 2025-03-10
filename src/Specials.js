@@ -3,7 +3,7 @@ import "./index.css";
 
 const specialsData = [
   { title: "Greek Salad", img: "/images/greek-salad.jpg" },
-  { title: "Bruschetta", img: "/images/bruschetta.jpg" },
+  { title: "Bruschetta", img: "/images/bruschetta.png" },
   { title: "Lemon Dessert", img: "/images/lemon-dessert.jpg" },
 ];
 
